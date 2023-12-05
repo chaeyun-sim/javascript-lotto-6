@@ -73,10 +73,10 @@ class Stats {
 
   #updateSecondOrThird(bonusPoint) {
     if (bonusPoint) {
-      this.stats.third += 1;
+      this.stats.second += 1;
       this.winningCashes += WinningMoney[2];
     } else {
-      this.stats.second += 1;
+      this.stats.third += 1;
       this.winningCashes += WinningMoney[3];
     }
   }
