@@ -14,6 +14,7 @@ class Controller {
     await this.requestCash();
     this.requestGenerateLotto();
     await this.requestWinningNumbers();
+    await this.requestBonusNumber();
   }
 
   async requestCash() {
@@ -45,6 +46,11 @@ class Controller {
       OutputView.print(`${error.message}`);
       await this.requestWinningNumbers();
     }
+  }
+
+  async requestBonusNumber() {
+    const input = await InputView.inputBonusNumber();
+    console.log(input);
   }
 }
 
