@@ -38,7 +38,7 @@ const Validator = {
    * @param {string} input
    */
   checkNumber(input) {
-    if (!/\d+/g.test(input)) throw new Error(ERROR_MESSAGE.onlyNumber);
+    if (isNaN(input)) throw new Error(ERROR_MESSAGE.onlyNumber);
   },
 
   /**
