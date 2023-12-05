@@ -8,8 +8,8 @@ class Cash {
    * @param {string} input
    */
   constructor(input) {
-    this.#cash = input;
     this.#validate(input);
+    this.#cash = Number(input);
   }
 
   /**
@@ -17,7 +17,7 @@ class Cash {
    * @param {string} input
    */
   #validate(input) {
-    Validator.checkCash(input);
+    Validator.isMoneyValid(String(input));
   }
 
   /**

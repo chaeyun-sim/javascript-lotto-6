@@ -4,10 +4,11 @@ class BonusNumber {
   #bonus;
   /**
    *
+   * @param {number[]} winnings
    * @param {string} input
    */
-  constructor(input) {
-    this.#validate(input);
+  constructor(winnings, input) {
+    this.#validate(winnings, input);
     this.#bonus = Number(input);
   }
 
@@ -15,10 +16,8 @@ class BonusNumber {
    *
    * @param {string} input
    */
-  #validate(input) {
-    Validator.emptyInput(input);
-    Validator.checkNumber(Number(input));
-    Validator.checkRange(Number(input));
+  #validate(winnings, input) {
+    Validator.isBonusNumberValid(winnings, input);
   }
 
   /**

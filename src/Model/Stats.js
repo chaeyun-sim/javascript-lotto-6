@@ -89,6 +89,7 @@ class Stats {
   #printStats() {
     const counts = Object.values(this.stats);
 
+    OutputView.printStats();
     Object.values(STATS_TEXT).forEach((item, i) =>
       OutputView.print(`${item}${counts[i]}개`)
     );

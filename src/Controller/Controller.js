@@ -1,11 +1,12 @@
 import InputView from '../View/InputView.js';
 import OutputView from '../View/OutputView.js';
 import Cash from '../Model/Cash.js';
-import { UNIT } from '../constants/constants.js';
+import { GUIDE_TEXT, UNIT } from '../constants/constants.js';
 import Lottos from '../Model/Lottos.js';
 import Lotto from '../Model/Lotto.js';
 import BonusNumber from '../Model/BonusNumber.js';
 import Stats from '../Model/Stats.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 class Controller {
   #cash;
@@ -13,7 +14,7 @@ class Controller {
   #winnings;
   #bonus;
 
-  async control() {
+  async run() {
     await this.requestCash();
     this.requestGenerateLotto();
     await this.requestWinningNumbers();
@@ -26,33 +27,25 @@ class Controller {
       const input = await InputView.inputMoney();
       this.#cash = new Cash(input).returnCash();
     } catch (error) {
-      OutputView.print(`${error.message}`);
+      OutputView.printError(error);
       await this.requestCash();
     }
   }
 
   requestGenerateLotto() {
-    try {
-      const count = this.#cash / UNIT;
-
-      OutputView.printLottosCount(count);
-      this.#lottos = new Lottos(count).returnLottos();
-    } catch (error) {
-      OutputView.print(`${error.message}`);
-      this.requestGenerateLotto();
-    }
+    const count = this.#cash / UNIT;
+    OutputView.printLottosCount(count);
+    this.#lottos = new Lottos(count).returnLottos();
   }
 
   async requestWinningNumbers() {
     try {
       const input = await InputView.inputWinningNumbers();
       const splited = input.split(',').map(Number);
-
       this.lotto = new Lotto(splited);
-      this.lotto.otherValidates();
       this.#winnings = this.lotto.returnLotto();
     } catch (error) {
-      OutputView.print(`${error.message}`);
+      OutputView.printError(error);
       await this.requestWinningNumbers();
     }
   }
@@ -65,7 +58,7 @@ class Controller {
         Number(input)
       ).returnBonus();
     } catch (error) {
-      OutputView.print(`${error.message}`);
+      OutputView.printError(error);
       await this.requestBonusNumber();
     }
   }
@@ -80,7 +73,7 @@ class Controller {
 
       OutputView.printReturnRate(money);
     } catch (error) {
-      OutputView.print(`${error.message}`);
+      OutputView.printError(error);
       this.requestStats();
     }
   }

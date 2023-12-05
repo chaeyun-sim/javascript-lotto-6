@@ -7,7 +7,7 @@ const OutputView = {
   },
 
   printLottosCount(count) {
-    MissionUtils.Console.print(`${count}${GUIDE_TEXT.printLotto}`);
+    MissionUtils.Console.print(`\n${count}${GUIDE_TEXT.printLotto}`);
   },
 
   printLotto(lotto) {
@@ -21,6 +21,10 @@ const OutputView = {
 
   printReturnRate(rate) {
     MissionUtils.Console.print(GUIDE_TEXT.returnRate.replace('*', rate));
+  },
+
+  printError(error) {
+    MissionUtils.Console.print(`${error.message}`);
   },
 };
 

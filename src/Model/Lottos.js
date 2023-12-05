@@ -25,8 +25,7 @@ class Lottos {
         45,
         6
       );
-      const lotto = RANDOM_NUMBERS.sort((a, b) => a - b);
-      this.#validateLottoAndAdd(lotto);
+      this.#validateLotto(RANDOM_NUMBERS);
 
       count--;
     }
@@ -36,7 +35,7 @@ class Lottos {
    *
    * @param {number[]} lotto
    */
-  #validateLottoAndAdd(lotto) {
+  #validateLotto(lotto) {
     const validLotto = new Lotto(lotto).returnLotto();
     this.#printLotto(validLotto);
     this.#addLotto(validLotto);

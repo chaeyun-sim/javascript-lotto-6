@@ -1,5 +1,6 @@
 const UNIT = 1000;
 const WinningMoney = [5000, 50000, 1500000, 30000000, 2000000000];
+const TOTAL_LOTTO_NUMBERS = 6;
 
 const STATS_TEXT = Object.freeze({
   fifth: '3개 일치 (5,000원) - ',
@@ -12,9 +13,9 @@ const STATS_TEXT = Object.freeze({
 const GUIDE_TEXT = Object.freeze({
   inputMoney: '구입금액을 입력해 주세요.\n',
   printLotto: '개를 구매했습니다.',
-  inputWinningNumbers: '당첨 번호를 입력해 주세요.\n',
-  inputBonusNumber: '보너스 번호를 입력해 주세요.\n',
-  winningState: '당첨 통계',
+  inputWinningNumbers: '\n당첨 번호를 입력해 주세요.\n',
+  inputBonusNumber: '\n보너스 번호를 입력해 주세요.\n',
+  winningState: '\n당첨 통계',
   divider: '---',
   returnRate: '총 수익률은 *%입니다.',
 });
@@ -24,14 +25,17 @@ const ERROR_MESSAGE = Object.freeze({
   onlyNumber: '[ERROR] 숫자 외의 문자는 입력할 수 없습니다.',
   onlyNumberAndComma: '[ERROR] 숫자외 쉼표 외의 문자는 입력할 수 없습니다.',
   invalidRange: '[ERROR] 입력된 번호는 1 이상 45 이하여야 합니다.',
-  invalidUnit: `[ERROR] ${UNIT}원 단위로 입력할 수 있습니다.`,
-  minimum: `[ERROR] ${UNIT} 미만은 입력할 수 없습니다.`,
+  invalidUnit: '[ERROR] 1000원 단위로 입력할 수 있습니다.',
+  minimum: '[ERROR] 1000원 미만은 입력할 수 없습니다.',
+  invalidLength: '[ERROR] 로또의 개수는 6개입니다.',
+  duplicated: '[ERROR] 중복된 숫자가 존재합니다.',
 });
 
-const PATTERN = Object.freeze({
-  onlyNumber: /^(?:[1-9]|[1-3][0-9]|4[0-5])$/,
-  numberWithComma:
-    /^(?:[1-9]|[1-3][0-9]|4[0-5])(?:,[1-9]|[1-3][0-9]|4[0-5])*(?:,(?:[1-9]|[1-3][0-9]|4[0-5]))?$/,
-});
-
-export { UNIT, WinningMoney, STATS_TEXT, GUIDE_TEXT, ERROR_MESSAGE, PATTERN };
+export {
+  UNIT,
+  WinningMoney,
+  TOTAL_LOTTO_NUMBERS,
+  STATS_TEXT,
+  GUIDE_TEXT,
+  ERROR_MESSAGE,
+};
