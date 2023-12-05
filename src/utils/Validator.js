@@ -57,16 +57,6 @@ const Check = {
 
   /**
    *
-   * @param {string} input
-   */
-  checkSpace(input) {
-    if (/\s/.test(input)) {
-      throw new CustomError(ERROR_MESSAGE.onlyNumber);
-    }
-  },
-
-  /**
-   *
    * @param {string} str
    */
   checkUnit(str) {
@@ -94,11 +84,10 @@ const Check = {
    * @param {number[]} numbers
    */
   checkLength(numbers) {
-    if (numbers.length < TOTAL_LOTTO_NUMBERS) {
-      throw new CustomError(ERROR_MESSAGE.invalidLength);
-    }
-
-    if (numbers.length > TOTAL_LOTTO_NUMBERS) {
+    if (
+      numbers.length > TOTAL_LOTTO_NUMBERS ||
+      numbers.length < TOTAL_LOTTO_NUMBERS
+    ) {
       throw new CustomError(ERROR_MESSAGE.invalidLength);
     }
   },
