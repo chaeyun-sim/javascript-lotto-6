@@ -12,6 +12,7 @@ class Controller {
   async control() {
     await this.requestCash();
     this.requestGenerateLotto();
+    await this.requestWinningNumbers();
   }
 
   async requestCash() {
@@ -29,6 +30,11 @@ class Controller {
 
     OutputView.printLottosCount(count);
     this.#lottos = new Lottos(count).returnLottos();
+  }
+
+  async requestWinningNumbers() {
+    const input = await InputView.inputWinningNumbers();
+    return input;
   }
 }
 
