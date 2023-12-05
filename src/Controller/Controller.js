@@ -3,9 +3,11 @@ import OutputView from '../View/OutputView.js';
 import Cash from '../Model/Cash.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { UNIT } from '../constants/constants.js';
+import Lottos from '../Model/Lottos.js';
 
 class Controller {
   #cash;
+  #lottos;
 
   async control() {
     await this.requestCash();
@@ -26,6 +28,7 @@ class Controller {
     const count = this.#cash / UNIT;
 
     OutputView.printLottosCount(count);
+    this.#lottos = new Lottos(count).returnLottos();
   }
 }
 

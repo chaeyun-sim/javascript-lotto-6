@@ -10,8 +10,8 @@ const OutputView = {
     MissionUtils.Console.print(`${count}${GUIDE_TEXT.printLotto}`);
   },
 
-  printLottos(text, lottos) {
-    lottos.forEach(lotto => MissionUtils.Console.print(lotto));
+  printLotto(lotto) {
+    MissionUtils.Console.print(`[${lotto.join(', ')}]`);
   },
 
   printStats() {

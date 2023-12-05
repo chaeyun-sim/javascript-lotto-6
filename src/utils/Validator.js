@@ -23,6 +23,32 @@ const Validator = {
    *
    * @param {string} input
    */
+  checkLotto(input) {
+    this.emptyInput(input);
+
+    if (!PATTERN.numberWithComma.test(input))
+      throw new CustomError(ERROR_MESSAGE.onlyNumberAndComma);
+
+    const lotto = input.split(',').map(Number);
+    this.checkAsArray(lotto);
+  },
+
+  /**
+   *
+   * @param {number[]} array
+   */
+  checkAsArray(array) {
+    array.forEach(num => {
+      if (num < 1 || num > 45) {
+        throw new CustomError(ERROR_MESSAGE.invalidRange);
+      }
+    });
+  },
+
+  /**
+   *
+   * @param {string} input
+   */
   emptyInput(input) {
     if (!input) throw new CustomError(ERROR_MESSAGE.noInput);
   },
