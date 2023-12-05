@@ -5,6 +5,7 @@ import { UNIT } from '../constants/constants.js';
 import Lottos from '../Model/Lottos.js';
 import Lotto from '../Model/Lotto.js';
 import BonusNumber from '../Model/BonusNumber.js';
+import Stats from '../Model/Stats.js';
 
 class Controller {
   #cash;
@@ -17,6 +18,7 @@ class Controller {
     this.requestGenerateLotto();
     await this.requestWinningNumbers();
     await this.requestBonusNumber();
+    this.requestStats();
   }
 
   async requestCash() {
@@ -30,10 +32,15 @@ class Controller {
   }
 
   requestGenerateLotto() {
-    const count = this.#cash / UNIT;
+    try {
+      const count = this.#cash / UNIT;
 
-    OutputView.printLottosCount(count);
-    this.#lottos = new Lottos(count).returnLottos();
+      OutputView.printLottosCount(count);
+      this.#lottos = new Lottos(count).returnLottos();
+    } catch (error) {
+      OutputView.print(`${error.message}`);
+      this.requestGenerateLotto();
+    }
   }
 
   async requestWinningNumbers() {
@@ -53,10 +60,28 @@ class Controller {
   async requestBonusNumber() {
     try {
       const input = await InputView.inputBonusNumber();
-      this.#bonus = new BonusNumber(input).returnBonus();
+      this.#bonus = new BonusNumber(
+        this.#winnings,
+        Number(input)
+      ).returnBonus();
     } catch (error) {
       OutputView.print(`${error.message}`);
       await this.requestBonusNumber();
+    }
+  }
+
+  requestStats() {
+    try {
+      const money = new Stats(
+        this.#lottos,
+        this.#winnings,
+        this.#bonus
+      ).printwinningCashes(this.#cash);
+
+      OutputView.printReturnRate(money);
+    } catch (error) {
+      OutputView.print(`${error.message}`);
+      this.requestStats();
     }
   }
 }
