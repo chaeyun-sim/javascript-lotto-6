@@ -28,4 +28,10 @@ const ERROR_MESSAGE = Object.freeze({
   minimum: `[ERROR] ${UNIT} 미만은 입력할 수 없습니다.`
 })
 
-export {UNIT, WinningMoney, STATS_TEXT, GUIDE_TEXT, ERROR_MESSAGE}
+const PATTERN = Object.freeze({
+	onlyNumber: /^(?:[1-9]|[1-3][0-9]|4[0-5])$/,
+	numberWithComma:
+		/^(?:[1-9]|[1-3][0-9]|4[0-5])(?:,[1-9]|[1-3][0-9]|4[0-5])*(?:,(?:[1-9]|[1-3][0-9]|4[0-5]))?$/,
+});
+
+export { UNIT, WinningMoney, STATS_TEXT, GUIDE_TEXT, ERROR_MESSAGE, PATTERN };
