@@ -10,10 +10,10 @@ const STATS_TEXT = Object.freeze({
 });
 
 const GUIDE_TEXT = Object.freeze({
-	inputMoney: '구입금액을 입력해 주세요.',
+	inputMoney: '구입금액을 입력해 주세요.\n',
 	printLotto: '개를 구매했습니다.',
-	inputWinningNumbers: '당첨 번호를 입력해 주세요.',
-	inputBonusNumber: '보너스 번호를 입력해 주세요.',
+	inputWinningNumbers: '당첨 번호를 입력해 주세요.\n',
+	inputBonusNumber: '보너스 번호를 입력해 주세요.\n',
 	winningState: '당첨 통계',
 	divider: '---',
 	returnRate: '총 수익률은 *%입니다.',
