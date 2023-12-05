@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE, PATTERN, UNIT } from '../constants/constants.js';
+import { ERROR_MESSAGE, UNIT } from '../constants/constants.js';
 import CustomError from './CustomError.js';
 
 const Validator = {
@@ -9,12 +9,19 @@ const Validator = {
   checkCash(input) {
     this.emptyInput(input);
     this.checkNumber(input);
+    this.checkUnit(Number(input));
+  },
 
-    if (Number(input) < UNIT) {
+  /**
+   *
+   * @param {number} num
+   */
+  checkUnit(num) {
+    if (num < UNIT) {
       throw new CustomError(ERROR_MESSAGE.minimum);
     }
 
-    if (Number(input) % UNIT) {
+    if (num % UNIT) {
       throw new CustomError(ERROR_MESSAGE.invalidUnit);
     }
   },
@@ -26,10 +33,7 @@ const Validator = {
   checkLotto(numbers) {
     numbers.forEach(num => {
       this.checkNumber(num);
-
-      if (num < 1 || num > 45) {
-        throw new CustomError(ERROR_MESSAGE.invalidRange);
-      }
+      this.checkRange(num);
     });
   },
 
@@ -39,6 +43,16 @@ const Validator = {
    */
   checkNumber(input) {
     if (isNaN(input)) throw new Error(ERROR_MESSAGE.onlyNumber);
+  },
+
+  /**
+   *
+   * @param {number} num
+   */
+  checkRange(num) {
+    if (num < 1 || num > 45) {
+      throw new CustomError(ERROR_MESSAGE.invalidRange);
+    }
   },
 
   /**
