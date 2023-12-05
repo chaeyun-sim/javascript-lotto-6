@@ -1,13 +1,14 @@
 import InputView from '../View/InputView.js';
 import OutputView from '../View/OutputView.js';
 import Cash from '../Model/Cash.js';
-import { MissionUtils } from '@woowacourse/mission-utils';
 import { UNIT } from '../constants/constants.js';
 import Lottos from '../Model/Lottos.js';
+import Lotto from '../Model/Lotto.js';
 
 class Controller {
   #cash;
   #lottos;
+  #winnings;
 
   async control() {
     await this.requestCash();
@@ -20,7 +21,7 @@ class Controller {
       const input = await InputView.inputMoney();
       this.#cash = new Cash(input).returnCash();
     } catch (error) {
-      MissionUtils.Console.print(`${error.message}`);
+      OutputView.print(`${error.message}`);
       await this.requestCash();
     }
   }
@@ -33,8 +34,17 @@ class Controller {
   }
 
   async requestWinningNumbers() {
-    const input = await InputView.inputWinningNumbers();
-    return input;
+    try {
+      const input = await InputView.inputWinningNumbers();
+      const splited = input.split(',').map(Number);
+
+      this.lotto = new Lotto(splited);
+      this.lotto.otherValidates();
+      this.#winnings = this.lotto.returnLotto();
+    } catch (error) {
+      OutputView.print(`${error.message}`);
+      await this.requestWinningNumbers();
+    }
   }
 }
 
