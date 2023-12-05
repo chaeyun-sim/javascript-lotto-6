@@ -1,6 +1,9 @@
 import InputView from '../View/InputView.js'
+import Cash from '../Model/Cash.js'
 
 class Controller {
+  #cash
+
   constructor() {
     this.run();
   }
@@ -11,7 +14,7 @@ class Controller {
 
   async requestCash(){
     const cash = await InputView.inputMoney();
-    return cash;
+    this.#cash = new Cash(cash).returnCash();
   }
 }
 
